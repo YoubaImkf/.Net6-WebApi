@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "7YUEtBkQzIaEsAFWvlNdr2XL6WjJtHdiYCwSG++8IlM=",
+  "Source": "WebDemo.Api",
+  "BasePath": "_content/WebDemo.Api",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
