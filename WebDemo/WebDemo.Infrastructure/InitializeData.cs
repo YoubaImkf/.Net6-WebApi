@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Linq;
 using WebApiDemo.Core.Models;
 using WebDemo.Core.Models;
 using WebDemo.Infrastructure.Data;

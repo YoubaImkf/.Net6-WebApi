@@ -1,4 +1,4 @@
-#region ( https:/SOURCE )
+ï»¿#region ( https:/SOURCE )
 //source : source : https://docs.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-6.0&tabs=visual-studio
 
 //source : https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-web-api?view=aspnetcore-6.0&tabs=visual-studio
@@ -6,15 +6,20 @@
 #endregion
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using System;
 using System.Text;
 using WebDemo.Api.Options;
+using WebDemo.Core.Hubs;
 using WebDemo.Core.Interfaces;
 using WebDemo.Infrastructure;
 using WebDemo.Infrastructure.Data;
@@ -28,6 +33,10 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
     // Add services to the container
     builder.Services.AddControllers();  // !!!!Add = ajout d'un middleware dans le pipeline!!!!
     builder.Services.AddEndpointsApiExplorer();
+
+    #region//-------SignalR--------- 
+    builder.Services.AddSignalR();
+    #endregion
 
     #region//--------Versioning------before_Build----Swagger--
     builder.Services.AddSwaggerGen();//SWAGGER
@@ -76,7 +85,7 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
      * (==SANS APP SETTING==)
     Log.Logger = new LoggerConfiguration().MinimumLevel.Debug().WriteTo.Console()
         .WriteTo.File("log.txt", outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fff zzz} [{Level:u3}] {Message:lj}{NewLine}{Exception}")
-        .Enrich.WithThreadId() //Les événements écrits dans le journal porteront une propriété ThreadId avec                        l'id du thread géré qui les a écrits.   
+        .Enrich.WithThreadId() //Les ï¿½vï¿½nements ï¿½crits dans le journal porteront une propriï¿½tï¿½ ThreadId avec                        l'id du thread gï¿½rï¿½ qui les a ï¿½crits.   
      .WriteTo.MSSqlServer(connectionString,sinkOptions: new MSSqlServerSinkOptions { TableName = "LogEvents"})
         .CreateLogger();
     ==============================================*/
@@ -94,7 +103,6 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
 
     /*logger.Information("Application is RUNNING..... follow her x)");*/
     #endregion
-
 
     #region //--------For Entity Framework-----AUTH__AuthDbContext
     builder.Services.AddDbContext<AuthDbContext>(options => options.UseSqlServer(config.GetConnectionString("DefaultConnection")));
@@ -118,20 +126,19 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
 
     #region //---------Adding JWT Bearer-----ATUH
     .AddJwtBearer(options =>
-     {
-         options.SaveToken = true;
-         options.RequireHttpsMetadata = false;
-         options.TokenValidationParameters = new TokenValidationParameters()
-         {
-             ValidateIssuer = true,
-             ValidateAudience = true,
-             ValidAudience = config["JWT:ValidAudience"],
-             ValidIssuer = config["JWT:ValidIssuer"],
-             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:Key"]))
-         };
-     });
+    {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidAudience = config["JWT:ValidAudience"],
+            ValidIssuer = config["JWT:ValidIssuer"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["JWT:Key"]))
+        };
+    });
     #endregion
-
 
     #region//--------Builder-------
     var app = builder.Build();
@@ -161,6 +168,8 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
         }
     });
     #endregion
+
+    app.MapHub<NotificationHub>("/WebDemoHub");//SignalR EndPoint
 
     app.UseAuthentication();//authentication
 

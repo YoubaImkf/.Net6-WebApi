@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using System;
 
 namespace WebDemo.Api.Options
 {

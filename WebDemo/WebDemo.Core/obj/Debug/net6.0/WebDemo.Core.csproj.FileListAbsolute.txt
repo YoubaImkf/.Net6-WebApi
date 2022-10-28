@@ -1,4 +1,5 @@
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Core\bin\Debug\net6.0\WebDemo.Core.deps.json
+C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Core\bin\Debug\net6.0\WebDemo.Core.runtimeconfig.json
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Core\bin\Debug\net6.0\WebDemo.Core.dll
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Core\bin\Debug\net6.0\WebDemo.Core.pdb
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Core\obj\Debug\net6.0\WebDemo.Core.csproj.AssemblyReference.cache
@@ -9,4 +10,5 @@ C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Core\obj\Debug\net6.0\WebDe
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Core\obj\Debug\net6.0\WebDemo.Core.dll
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Core\obj\Debug\net6.0\refint\WebDemo.Core.dll
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Core\obj\Debug\net6.0\WebDemo.Core.pdb
+C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Core\obj\Debug\net6.0\WebDemo.Core.genruntimeconfig.cache
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Core\obj\Debug\net6.0\ref\WebDemo.Core.dll

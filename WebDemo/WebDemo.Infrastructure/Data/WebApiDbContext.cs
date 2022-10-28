@@ -16,8 +16,8 @@ namespace WebDemo.Infrastructure.Data
         {
         }
 
-        public DbSet<User> User { get; set; } = null!;
-        public DbSet<Device> Device { get; set; } = null!;
+        public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Device> Device { get; set; }
 
 
 

@@ -1,4 +1,6 @@
-﻿namespace WebDemo.Api.Options
+﻿using System;
+
+namespace WebDemo.Api.Options
 {
     /*IOptions*/
     public class PositionOption

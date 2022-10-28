@@ -24,11 +24,6 @@ namespace WebDemo.Api.Helpers
             CreateMap<Device, DeviceDto>();
             #endregion
 
-            #region User-Device
-            CreateMap<UserDto, DeviceDto>();
-
-            CreateMap<DeviceDto, UserDto>();
-            #endregion
             #region User-Add
             CreateMap<UserAddOrUpdateDto, User>();
             #endregion

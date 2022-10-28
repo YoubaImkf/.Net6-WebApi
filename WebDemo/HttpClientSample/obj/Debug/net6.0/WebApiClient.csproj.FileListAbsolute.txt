@@ -1,0 +1,5 @@
+C:\Users\youba.imakhlaf\source\repos\WebDemo\HttpClientSample\obj\Debug\net6.0\WebApiClient.csproj.AssemblyReference.cache
+C:\Users\youba.imakhlaf\source\repos\WebDemo\HttpClientSample\obj\Debug\net6.0\WebApiClient.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\youba.imakhlaf\source\repos\WebDemo\HttpClientSample\obj\Debug\net6.0\WebApiClient.AssemblyInfoInputs.cache
+C:\Users\youba.imakhlaf\source\repos\WebDemo\HttpClientSample\obj\Debug\net6.0\WebApiClient.AssemblyInfo.cs
+C:\Users\youba.imakhlaf\source\repos\WebDemo\HttpClientSample\obj\Debug\net6.0\WebApiClient.csproj.CoreCompileInputs.cache

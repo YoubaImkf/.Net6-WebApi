@@ -18,8 +18,8 @@ namespace WebDemo.Core.Models
 
         //Des relations entièrement définies
         //source: https://docs.microsoft.com/en-us/ef/core/modeling/relationships?tabs=fluent-api%2Cfluent-api-simple-key%2Csimple-key
-        public User? User { get; set; }
-        
+        public virtual User? User { get; set; }
+
 
     }
 }

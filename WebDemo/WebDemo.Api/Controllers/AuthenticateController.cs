@@ -1,11 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using WebDemo.Core.Dtos.Auth;
+using WebDemo.Core.RealTimeModels;
 using WebDemo.Infrastructure.Data;
+
 
 namespace WebDemo.Api.Controllers
 {   //source: https://www.c-sharpcorner.com/article/jwt-authentication-and-authorization-in-net-6-0-with-identity-framework/
@@ -17,6 +26,7 @@ namespace WebDemo.Api.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly WebApiDbContext _userContext;
+       
 
         public AuthenticateController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, WebApiDbContext userContext)
         {
@@ -59,6 +69,7 @@ namespace WebDemo.Api.Controllers
                 }
 
                 var token = GetToken(authClaims);
+
 
                 return Ok(new
                 {
@@ -197,6 +208,14 @@ namespace WebDemo.Api.Controllers
 
         }
 
+/*        public Notification Notif()
+        {
+            //signalR
+            Notification notif = new Notification("Vous vous etes bien connecter", DateTime.Now);
+            _hubContext.Clients.All.SendAsync("NotificationReceived", notif);
+            return ""
+        }*/
+
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var authSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
@@ -211,6 +230,7 @@ namespace WebDemo.Api.Controllers
 
             return token;
         }
+
 
     }
 }

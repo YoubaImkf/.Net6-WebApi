@@ -1,4 +1,6 @@
-﻿namespace WebApiDemo.Dtos
+﻿using System.Collections.Generic;
+
+namespace WebApiDemo.Dtos
 // => Un modèle est un ensemble de classes qui représentent les données gérées par l’application. Le modèle de cette application est une classe unique.
 
 //Un DTO (Data Transfer Object) est un objet qui définit comment les données seront envoyées entre les applications. (seulement ce quon veux montrer au front)

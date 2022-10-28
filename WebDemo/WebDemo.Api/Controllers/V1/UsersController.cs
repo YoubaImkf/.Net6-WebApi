@@ -1,11 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ApplicationParts;
-using Microsoft.EntityFrameworkCore;
-using WebApiDemo.Core.Models;
+using Microsoft.AspNetCore.SignalR;
+using System;
+using System.Threading.Tasks;
 using WebApiDemo.Dtos;
+using WebDemo.Core.Hubs;
 using WebDemo.Core.Interfaces;
-using WebDemo.Infrastructure.Data;
+using WebDemo.Core.RealTimeModels;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,11 +23,13 @@ namespace WebDemo.Api.Controllers.V1
         //source: https://code-maze.com/automapper-net-core/
 
         private readonly IUserService _userService; //interface 
-        private readonly WebApiDbContext _context;
-        public UsersController(IUserService userService, WebApiDbContext context)
+        private readonly IHubContext<NotificationHub, INotificationHub> _hubContext;
+                                     //Obliger 
+
+        public UsersController(IUserService userService, IHubContext<NotificationHub, INotificationHub> hubContext)
         {
             _userService = userService;
-            _context = context;
+            _hubContext = hubContext;
         }
 
         /// <summary> 
@@ -91,10 +95,14 @@ namespace WebDemo.Api.Controllers.V1
         [HttpPut("{id}")]
         public async Task<IActionResult> Put([FromBody] UserAddOrUpdateDto userDto, int id)
         {
+            var notification = new Notification("An User has been update", DateTime.Now);
             var user = await _userService.FindUserByIdAsync(id);
             if (user == null)
                 return NotFound();
+
             await _userService.UpdateUserAsync(user, userDto);
+            //SignalR Notif
+            await _hubContext.Clients.All.ReceiveNotification(notification, userDto);
 
             return Ok();
         }

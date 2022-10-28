@@ -1,13 +1,16 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using WebApiDemo.Core.Models;
 using WebApiDemo.Dtos;
 using WebDemo.Api.Controllers.V2;
-using WebDemo.Core.Interfaces;
 using WebDemo.Api.Options;
-using WebDemo.Infrastructure.Data;
+using WebDemo.Core.Interfaces;
 
 namespace WebDemo.Api.Services
 {
@@ -16,13 +19,13 @@ namespace WebDemo.Api.Services
         //Méthodes q'uon utiliseras dans le controller ( _xxxx )
         //source : https://jasonwatmore.com/fr/post/2022/03/15/net-6-exemple-et-didacticiel-d-api-crud#user-service-cs
 
-        private readonly WebApiDbContext _webApiDbContext;
+        private readonly IWebApiDbContext _webApiDbContext;
         private readonly IMapper _mapper;
         private readonly PositionOption _options;
         private readonly PositionOption _snapshotOptions;
         private readonly ILogger<UsersVtwoController> _logger;
 
-        public UserService(WebApiDbContext webApiDbContext, IMapper mapper, IOptions<PositionOption> options, IOptionsSnapshot<PositionOption> snapshotOptions, ILogger<UsersVtwoController> logger)
+        public UserService(IWebApiDbContext webApiDbContext, IMapper mapper, IOptions<PositionOption> options, IOptionsSnapshot<PositionOption> snapshotOptions, ILogger<UsersVtwoController> logger)
         {
             _webApiDbContext = webApiDbContext;
             _mapper = mapper;
@@ -30,13 +33,22 @@ namespace WebDemo.Api.Services
             _snapshotOptions = snapshotOptions.Value;
             _logger = logger;
         }
-
+        //IEnumerable to List/Ilst/IDbAsyncEnumerable marche pas
         public async Task<IEnumerable<UserDto>> GetAllAsync()
-        {
-            Console.WriteLine("name :" + _options.Name + "title :" + _options.Title);
-            Console.WriteLine("name :" + _snapshotOptions.Name + "title :" + _snapshotOptions.Title);
-            return _mapper.Map<IEnumerable<UserDto>>(await _webApiDbContext.User.ToListAsync());
+        {          
+            Console.WriteLine("LoggerTest - name :" + _options.Name + "title :" + _options.Title);
+            Console.WriteLine("LoggerTest - name :" + _snapshotOptions.Name + "title :" + _snapshotOptions.Title);
+            var users = _mapper.Map<IEnumerable<UserDto>>(await _webApiDbContext.User.ToListAsync());
+            return users;      
         }
+
+        public IList<UserDto> GetAll()
+        {
+            var webapi = _webApiDbContext.User.ToList();
+            var users = _mapper.Map<IList<UserDto>>(_webApiDbContext.User.ToList());
+            return users;
+        }
+
 
         public async Task<IEnumerable<UserDto>> FindDevicesByUserIdAsync(int id)
         {
@@ -58,9 +70,9 @@ namespace WebDemo.Api.Services
 
         public async Task<UserDto> GetUserAsync(int id)
         {
-            _logger.LogInformation($"item with id '{id}' Found");
-
-            return _mapper.Map<UserDto>(await FindUserByIdAsync(id));
+            /*_logger.LogInformation($"item with id '{id}' Found");*/
+            var user = _mapper.Map<UserDto>(await FindUserByIdAsync(id));
+            return user;
         }
 
         public async Task DeleteUserAsync(int id)
@@ -109,6 +121,8 @@ namespace WebDemo.Api.Services
             if (user == null) throw new KeyNotFoundException("User not found");
             return user;
         }
+
+
 
     }
 }
