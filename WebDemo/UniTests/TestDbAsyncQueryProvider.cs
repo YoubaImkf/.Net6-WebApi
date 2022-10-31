@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Query;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Linq.Expressions;
@@ -10,7 +8,7 @@ using System.Threading.Tasks;
 namespace UniTests
 {
     //Notre fournisseur de requêtes for Db
-    //https://learn.microsoft.com/fr-fr/ef/ef6/fundamentals/testing/mocking?redirectedfrom=MSDN#testing-with-async-queries
+    //Source :https://learn.microsoft.com/fr-fr/ef/ef6/fundamentals/testing/mocking?redirectedfrom=MSDN#testing-with-async-queries
 
     #region TestDbAsyncEnumerator    /    TestDbAsyncQueryProvider
     internal class TestDbAsyncQueryProvider<TEntity> : IDbAsyncQueryProvider

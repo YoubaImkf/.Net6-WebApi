@@ -1,4 +1,5 @@
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\bin\Debug\net6.0\WebDemo.Infrastructure.deps.json
+C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\bin\Debug\net6.0\WebDemo.Infrastructure.runtimeconfig.json
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\bin\Debug\net6.0\WebDemo.Infrastructure.dll
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\bin\Debug\net6.0\WebDemo.Infrastructure.pdb
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\bin\Debug\net6.0\WebDemo.Core.dll
@@ -12,6 +13,5 @@ C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\obj\Debug\ne
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\obj\Debug\net6.0\WebDemo.Infrastructure.dll
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\obj\Debug\net6.0\refint\WebDemo.Infrastructure.dll
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\obj\Debug\net6.0\WebDemo.Infrastructure.pdb
-C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\obj\Debug\net6.0\ref\WebDemo.Infrastructure.dll
-C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\bin\Debug\net6.0\WebDemo.Infrastructure.runtimeconfig.json
 C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\obj\Debug\net6.0\WebDemo.Infrastructure.genruntimeconfig.cache
+C:\Users\youba.imakhlaf\source\repos\WebDemo\WebDemo.Infrastructure\obj\Debug\net6.0\ref\WebDemo.Infrastructure.dll

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿/*using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
 using WebDemo.Core.RealTimeModels;
 using WebDemo.Core.Hubs;
@@ -18,3 +18,4 @@ namespace WebDemo.Api.Services
                 : Task.CompletedTask;
     }
 }
+*/

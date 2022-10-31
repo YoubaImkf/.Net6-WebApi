@@ -33,7 +33,7 @@ namespace WebDemo.Api.Services
             _snapshotOptions = snapshotOptions.Value;
             _logger = logger;
         }
-        //IEnumerable to List/Ilst/IDbAsyncEnumerable marche pas
+ 
         public async Task<IEnumerable<UserDto>> GetAllAsync()
         {          
             Console.WriteLine("LoggerTest - name :" + _options.Name + "title :" + _options.Title);
@@ -42,12 +42,12 @@ namespace WebDemo.Api.Services
             return users;      
         }
 
-        public IList<UserDto> GetAll()
+/*        public IList<UserDto> GetAll()
         {
             var webapi = _webApiDbContext.User.ToList();
             var users = _mapper.Map<IList<UserDto>>(_webApiDbContext.User.ToList());
             return users;
-        }
+        }*/
 
 
         public async Task<IEnumerable<UserDto>> FindDevicesByUserIdAsync(int id)
@@ -117,7 +117,8 @@ namespace WebDemo.Api.Services
         //================== PRIVATE tjr à la fin ==================
         public async Task<User> FindUserByIdAsync(int id)
         {
-            var user = await _webApiDbContext.User.FindAsync(id);
+            var user = await _webApiDbContext.User.Where(e => e.Id == id).FirstOrDefaultAsync();
+            //var user = await _webApiDbContext.User.FindAsync(id);
             if (user == null) throw new KeyNotFoundException("User not found");
             return user;
         }

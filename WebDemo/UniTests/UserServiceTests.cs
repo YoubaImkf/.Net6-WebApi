@@ -37,7 +37,7 @@ namespace UniTests
         }
 
         [Fact]
-        public async Task Get_AllUser()
+        public async Task Get_AllUserAsyncTest()
         {
             //Arrange
             var user = new User() { Id = 1 };
@@ -49,7 +49,7 @@ namespace UniTests
 
             //Assert
             Assert.NotNull(result);
-            Assert.Equal(1, result.Count());
+            Assert.Single(result); // == Assert.Equal(1, result.Count())
         }
 
         [Fact]
@@ -65,27 +65,6 @@ namespace UniTests
             //Assert
             Assert.NotNull(OkResult);
             Assert.Equal(_userId, OkResult.Id);
-        }
-
-        [Fact]
-        public async Task Get_AllUserAsyncTest()
-        {
-            //Arrange
-            var user1 = new User() { FirstName = "coucou", LastName = "cMoi" };
-            var user2 = new User() { FirstName = "coucou", LastName = "cMoi" };
-            var user3 = new User() { FirstName = "coucou", LastName = "cMoi" };
-
-            _context.User.Add(user1);
-            _context.User.Add(user2);
-            _context.User.Add(user3);
-            await _context.SaveChangesAsync();
-
-            //Act
-            var result = await _userService.GetAllAsync();
-
-            //Assert 
-            Assert.NotNull(result);
-            Assert.Equal(3, result.Count());
         }
 
         [Fact]
@@ -117,7 +96,6 @@ namespace UniTests
             //Arrange
             var user = new UserAddOrUpdateDto();
 
-
             //Act
             await _userService.AddUserAsync(user);
             await _context.SaveChangesAsync();
@@ -133,10 +111,10 @@ namespace UniTests
             //Arrange
             var userToUpdate = new User();
             var userDto = new UserAddOrUpdateDto() { FirstName = "coucou", LastName = "cMoi" };
-            await _context.SaveChangesAsync();
-
+            
             //Act
             await _userService.UpdateUserAsync(userToUpdate, userDto);
+            await _context.SaveChangesAsync();
 
             //Assert
             Assert.NotNull(userToUpdate);
@@ -144,7 +122,6 @@ namespace UniTests
             Assert.True(userToUpdate.LastName == userDto.LastName);
 
         }
-
 
         [Fact]
         public async Task Get_DeviceByUserIdAsyncTest()
