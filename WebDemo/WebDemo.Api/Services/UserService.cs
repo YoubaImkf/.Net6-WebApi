@@ -42,12 +42,12 @@ namespace WebDemo.Api.Services
             return users;      
         }
 
-/*        public IList<UserDto> GetAll()
+        public IList<UserDto> GetAll()
         {
             var webapi = _webApiDbContext.User.ToList();
             var users = _mapper.Map<IList<UserDto>>(_webApiDbContext.User.ToList());
             return users;
-        }*/
+        }
 
 
         public async Task<IEnumerable<UserDto>> FindDevicesByUserIdAsync(int id)
@@ -94,8 +94,17 @@ namespace WebDemo.Api.Services
             //if user already exist najoute pas ...
             if (_webApiDbContext.User.Any(u => u.Email == user.Email))
                 throw new KeyNotFoundException("Email already exists");
-            await _webApiDbContext.User.AddAsync(user);
-            await _webApiDbContext.SaveChangesAsync();
+
+             var a = await _webApiDbContext.User.AddAsync(user);
+
+             var s = await _webApiDbContext.SaveChangesAsync();
+        }
+        public void AddUser(UserAddOrUpdateDto userAddDto)
+        {
+            var user = _mapper.Map<User>(userAddDto);
+
+            var s =  _webApiDbContext.User.Add(user);
+            var l = _webApiDbContext.SaveChanges();
         }
 
         public async Task UpdateUserAsync(User user, UserAddOrUpdateDto userDto)

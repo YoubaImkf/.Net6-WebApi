@@ -16,6 +16,8 @@ namespace WebDemo.Core.Interfaces
 
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
+        int SaveChanges();
+
         EntityEntry Update([NotNull] object entity);
         EntityEntry<TEntity> Update<TEntity>([NotNull] TEntity entity) where TEntity : class;
         void UpdateRange([NotNull] IEnumerable<object> entities);

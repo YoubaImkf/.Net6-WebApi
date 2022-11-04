@@ -94,11 +94,10 @@ namespace UniTests
         public async Task Add_UserAsyncTest()
         {
             //Arrange
-            var user = new UserAddOrUpdateDto();
+            var user = new UserAddOrUpdateDto() { FirstName = "John"};
 
             //Act
             await _userService.AddUserAsync(user);
-            await _context.SaveChangesAsync();
 
             //Asert
             Assert.NotNull(user);
