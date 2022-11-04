@@ -36,19 +36,18 @@ namespace WebDemo.Api.Services
  
         public async Task<IEnumerable<UserDto>> GetAllAsync()
         {          
-            Console.WriteLine("LoggerTest - name :" + _options.Name + "title :" + _options.Title);
-            Console.WriteLine("LoggerTest - name :" + _snapshotOptions.Name + "title :" + _snapshotOptions.Title);
+            Console.WriteLine("_options. - name :" + _options.Name + "title :" + _options.Title);
+            Console.WriteLine("_snapshotOptions - name :" + _snapshotOptions.Name + "title :" + _snapshotOptions.Title);
             var users = _mapper.Map<IEnumerable<UserDto>>(await _webApiDbContext.User.ToListAsync());
             return users;      
         }
-
+/*
         public IList<UserDto> GetAll()
         {
-            var webapi = _webApiDbContext.User.ToList();
             var users = _mapper.Map<IList<UserDto>>(_webApiDbContext.User.ToList());
             return users;
         }
-
+*/
 
         public async Task<IEnumerable<UserDto>> FindDevicesByUserIdAsync(int id)
         {

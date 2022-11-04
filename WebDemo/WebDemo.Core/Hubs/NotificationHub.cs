@@ -12,6 +12,8 @@ namespace WebDemo.Core.Hubs
     {
         public async Task NotifyAll(Notification notification, UserAddOrUpdateDto user) =>
            await Clients.All.ReceiveNotification(notification, user);
-    } //                                            record   |
-
+//                                                  record   |
+        public async Task BackgroundNotification(Notification notification) => 
+            await Clients.All.ReceiveBackgroundNotification(notification);
+    }
 }

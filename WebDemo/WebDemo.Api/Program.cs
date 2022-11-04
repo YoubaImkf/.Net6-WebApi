@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System;
@@ -25,6 +26,7 @@ using WebDemo.Infrastructure;
 using WebDemo.Infrastructure.Data;
 using WebDemo.Infrastructure.IndentityData;
 
+
 try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-hosting-diagnosticcontext-while-attempting-to-activate-ser
 {
     var builder = WebApplication.CreateBuilder(args);
@@ -33,10 +35,7 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
     // Add services to the container
     builder.Services.AddControllers();  // !!!!Add = ajout d'un middleware dans le pipeline!!!!
     builder.Services.AddEndpointsApiExplorer();
-
-    #region//-------SignalR--------- 
-    builder.Services.AddSignalR();
-    #endregion
+    builder.Services.AddMyServices();
 
     #region//--------Versioning------before_Build----Swagger--
     builder.Services.AddSwaggerGen();//SWAGGER
@@ -56,8 +55,6 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
         setup.SubstituteApiVersionInUrl = true;
     });
     #endregion
-
-    builder.Services.AddMyServices();
 
     #region //--------Connection String----------
     var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -124,7 +121,7 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
 
     #endregion
 
-    #region //---------Adding JWT Bearer-----ATUH
+    #region //---------Adding JWT Bearer-------ATUH
     .AddJwtBearer(options =>
     {
         options.SaveToken = true;
@@ -139,6 +136,17 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
         };
     });
     #endregion
+
+    #region//-------SignalR--------- 
+    builder.Services.AddSignalR();
+    #endregion
+
+    #region //---------Background Service----------
+
+    //builder.Services.AddHostedService<UserManagerService>();
+    builder.Services.AddHostedService<BgUserService>();
+    #endregion
+
 
     #region//--------Builder-------
     var app = builder.Build();
@@ -168,7 +176,7 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
         }
     });
     #endregion
-
+    
     app.MapHub<NotificationHub>("/WebDemoHub");//SignalR EndPoint
 
     app.UseAuthentication();//authentication
@@ -190,6 +198,6 @@ catch (Exception ex)
 }
 finally
 {
-    Log.Information("Shut down complete !!!!! ");
+    Log.Information("Shut down complete !");
     Log.CloseAndFlush();
 }

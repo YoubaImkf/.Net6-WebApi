@@ -11605,7 +11605,7 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\youba.imakhlaf\\.nuget\\packages\\": {},
+    "C:\\Users\\youba.imakhlaf_adm\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
@@ -11614,14 +11614,14 @@
       "projectUniqueName": "C:\\Users\\youba.imakhlaf\\source\\repos\\WebDemo\\UniTests\\UniTests.csproj",
       "projectName": "UniTests",
       "projectPath": "C:\\Users\\youba.imakhlaf\\source\\repos\\WebDemo\\UniTests\\UniTests.csproj",
-      "packagesPath": "C:\\Users\\youba.imakhlaf\\.nuget\\packages\\",
+      "packagesPath": "C:\\Users\\youba.imakhlaf_adm\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\youba.imakhlaf\\source\\repos\\WebDemo\\UniTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\youba.imakhlaf\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\youba.imakhlaf_adm\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

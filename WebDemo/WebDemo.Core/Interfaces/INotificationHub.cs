@@ -11,5 +11,6 @@ namespace WebDemo.Core.Interfaces
     public interface INotificationHub
     {
         Task ReceiveNotification(Notification notification, UserAddOrUpdateDto user);
+        Task ReceiveBackgroundNotification(Notification notification);
     }
 }

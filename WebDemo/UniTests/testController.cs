@@ -565,7 +565,7 @@ namespace UniTests
         }
 
         [Fact]
-        public void SynchroneAdd_WithDbSetANDMock()
+        public void SynchroneAdd_WithDbSetANDMock_return_AssertEqualFail()
         {
             var data = new List<User>
             {
@@ -609,7 +609,6 @@ namespace UniTests
         }
 
         //==============GitHub Test===============
-
         [Fact]
         public void DbContextMock_CreateDbSetMock_MethodNotSupported()
         {

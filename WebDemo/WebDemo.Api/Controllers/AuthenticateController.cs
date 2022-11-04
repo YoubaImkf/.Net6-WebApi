@@ -208,14 +208,6 @@ namespace WebDemo.Api.Controllers
 
         }
 
-/*        public Notification Notif()
-        {
-            //signalR
-            Notification notif = new Notification("Vous vous etes bien connecter", DateTime.Now);
-            _hubContext.Clients.All.SendAsync("NotificationReceived", notif);
-            return ""
-        }*/
-
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
             var authSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));

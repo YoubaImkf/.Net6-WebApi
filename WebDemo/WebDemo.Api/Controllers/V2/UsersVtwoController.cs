@@ -33,14 +33,13 @@ namespace WebDemo.Api.Controllers.V2
         /// Retourne tout les clients
         /// </summary>
         /// <description> salut </description>
-        [HttpGet, Authorize]
+        [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         /*      [ApiConventionMethod(typeof(DefaultApiConventions),nameof(DefaultApiConventions.Get))]*/
         public async Task<IActionResult> GetAsync()
         {
-
-            _logger.LogInformation("Web Api is runninggggg...");
+            _logger.LogInformation("someone used GetAll method");
             return Ok(await _userService.GetAllAsync());
         }
 
@@ -48,7 +47,7 @@ namespace WebDemo.Api.Controllers.V2
         /// <summary> 
         ///  Ajoute un client
         /// </summary>
-        [HttpPost /*,Authorize(Roles = "admin")*/] 
+        [HttpPost, Authorize(Roles = "admin")] 
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Post))]
         public async Task<IActionResult> Post([FromBody] UserAddOrUpdateDto userAddDto)
         {
