@@ -1,2 +1,4 @@
 bin
 .vs
+/WebDemo/WebDemo.Api/Logs/log.txt
+/WebDemo/WebDemo.Api/Logs/log.json
