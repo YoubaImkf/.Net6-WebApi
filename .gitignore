@@ -1,3 +1,4 @@
-# ignore ALL files in ANY directory named temp
-/WebDemo.Api/Logs/log.txt
-/WebDemo.Api/Logs/log.json
+bin
+.vs
+/WebDemo/WebDemo.Api/Logs/log.txt
+/WebDemo/WebDemo.Api/Logs/log.json
