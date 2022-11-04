@@ -25,7 +25,6 @@
 -Authentication and Authorization (swagger / EntitiesAuth)  
 -Unit Test ( Xunit [serviceProvider] )
 -Unit Test with Moq (Test double)
-
 -ASP.NET Core SignalR (Streaming DATA from client(console) to server(API)🔁)
 
 
