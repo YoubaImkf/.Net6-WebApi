@@ -9,6 +9,7 @@ using WebDemo.Core.Hubs;
 using WebDemo.Core.Interfaces;
 
 //source:https://learn.microsoft.com/en-us/aspnet/core/fundamentals/host/hosted-services?view=aspnetcore-6.0&tabs=visual-studio
+//FIRST WAY implements IHostedService, IDisposable
 public class UserManagerService : IHostedService, IDisposable
 {
     private int executionCount = 0;

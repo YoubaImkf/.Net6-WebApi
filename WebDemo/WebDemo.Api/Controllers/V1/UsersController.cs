@@ -101,7 +101,8 @@ namespace WebDemo.Api.Controllers.V1
                 return NotFound();
 
             await _userService.UpdateUserAsync(user, userDto);
-            //SignalR Notif
+
+            // SignalR Notif 
             await _hubContext.Clients.All.ReceiveNotification(notification, userDto);
 
             return Ok();

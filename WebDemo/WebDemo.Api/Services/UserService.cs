@@ -41,13 +41,13 @@ namespace WebDemo.Api.Services
             var users = _mapper.Map<IEnumerable<UserDto>>(await _webApiDbContext.User.ToListAsync());
             return users;      
         }
-/*
+
         public IList<UserDto> GetAll()
         {
             var users = _mapper.Map<IList<UserDto>>(_webApiDbContext.User.ToList());
             return users;
         }
-*/
+
 
         public async Task<IEnumerable<UserDto>> FindDevicesByUserIdAsync(int id)
         {

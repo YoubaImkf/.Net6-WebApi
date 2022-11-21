@@ -8,6 +8,7 @@ using WebDemo.Core.Hubs;
 using WebDemo.Core.Interfaces;
 using WebDemo.Core.RealTimeModels;
 //source : https://learn.microsoft.com/en-us/aspnet/core/signalr/background-services?view=aspnetcore-6.0
+// SECOND WAY
 public class BgUserService : BackgroundService
 {
     private readonly ILogger<BgUserService> _logger;
@@ -22,13 +23,12 @@ public class BgUserService : BackgroundService
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
-        {
-            
+        {           
             var notif = new Notification("Youba user exist", DateTime.Now);
             
-            await _hub.Clients.All.ReceiveBackgroundNotification(notif);
+            await _hub.Clients.All.ReceiveBackgroundNotification(notif); 
             _logger.LogInformation($"{ nameof(BgUserService) }"+" running at: {Time}", DateTime.Now);
-            await Task.Delay(5000, stoppingToken);
+            await Task.Delay(5000, stoppingToken); // each 5sec display log 
         }
     }
 }

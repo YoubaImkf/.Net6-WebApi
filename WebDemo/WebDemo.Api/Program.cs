@@ -177,7 +177,7 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
     });
     #endregion
     
-    app.MapHub<NotificationHub>("/WebDemoHub");//SignalR EndPoint
+    app.MapHub<NotificationHub>("/WebDemoHub");// SignalR EndPoint | ClientProgram
 
     app.UseAuthentication();//authentication
 
