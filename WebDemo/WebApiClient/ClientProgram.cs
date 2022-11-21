@@ -2,6 +2,7 @@
 // Source: https://www.youtube.com/watch?v=-mWewa_R7-8&ab_channel=WorldofZero
 using Microsoft.AspNetCore.SignalR.Client;
 using System.Text.Json;
+using WebApiDemo.Core.Models;
 using WebApiDemo.Dtos;
 using WebDemo.Core.RealTimeModels;
 
@@ -30,9 +31,13 @@ try
         Console.WriteLine($"Update User: {jsonUser}");
     });
 
-    hubConnection.On<Notification>("ReceiveBackgroundNotification", (notification) =>
+    hubConnection.On<Notification, UserDto>("ReceiveBackgroundNotification", (notification, user) =>
     {
+        var jsonUser = JsonSerializer.Serialize<UserDto>(user);
+
         Console.WriteLine($"Notif: {notification}");
+        Console.WriteLine($"user found: {jsonUser}");
+
     });
 
     Console.Read();

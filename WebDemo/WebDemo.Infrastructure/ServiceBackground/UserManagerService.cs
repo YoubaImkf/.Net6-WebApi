@@ -39,7 +39,7 @@ public class UserManagerService : IHostedService, IDisposable
 
         _logger.LogInformation(
             "Timed Hosted Service is working. Count: {Count}", count);
-        _hubContext.Clients.All.ReceiveBackgroundNotification(notif);
+/*        _hubContext.Clients.All.ReceiveBackgroundNotification(notif);*/
     }
 
     public Task StopAsync(CancellationToken stoppingToken)

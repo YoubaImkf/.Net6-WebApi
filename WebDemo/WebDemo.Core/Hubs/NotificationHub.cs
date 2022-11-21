@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System.Threading.Tasks;
+using WebApiDemo.Core.Models;
 using WebApiDemo.Dtos;
 using WebDemo.Core.Interfaces;
 using WebDemo.Core.RealTimeModels;
@@ -13,7 +14,7 @@ namespace WebDemo.Core.Hubs
         public async Task NotifyAll(Notification notification, UserAddOrUpdateDto user) =>
            await Clients.All.ReceiveNotification(notification, user);
 //                                                  record   |
-        public async Task BackgroundNotification(Notification notification) => 
-            await Clients.All.ReceiveBackgroundNotification(notification);
+        public async Task BackgroundNotification(Notification notification, UserDto user) => 
+            await Clients.All.ReceiveBackgroundNotification(notification, user);
     }
 }
