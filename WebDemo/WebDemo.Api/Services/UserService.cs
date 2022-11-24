@@ -36,32 +36,25 @@ namespace WebDemo.Api.Services
  
         public async Task<IEnumerable<UserDto>> GetAllAsync()
         {          
-            Console.WriteLine("_options. - name :" + _options.Name + "title :" + _options.Title);
-            Console.WriteLine("_snapshotOptions - name :" + _snapshotOptions.Name + "title :" + _snapshotOptions.Title);
+/*            Console.WriteLine("_options. - name :" + _options.Name + "title :" + _options.Title);
+            Console.WriteLine("_snapshotOptions - name :" + _snapshotOptions.Name + "title :" + _snapshotOptions.Title);*/
             var users = _mapper.Map<IEnumerable<UserDto>>(await _webApiDbContext.User.ToListAsync());
             return users;      
         }
 
-        public IList<UserDto> GetAll()
+/*        public IList<UserDto> GetAll()
         {
             var users = _mapper.Map<IList<UserDto>>(_webApiDbContext.User.ToList());
             return users;
-        }
+        }*/
 
 
         public async Task<IEnumerable<UserDto>> FindDevicesByUserIdAsync(int id)
         {
             //source : https://learn.microsoft.com/en-us/ef/ef6/fundamentals/relationships
-            /*var device = _mapper.Map<IEnumerable<DeviceDto>>(_webApiDbContext.Device.First(d => d.UserId == idUser));*/
             var device = _webApiDbContext.User
                                          .Include(d => d.Devices) //jointure
                                          .Where(u => u.Id == id);
-            // request form:
-            /* SELECT [u].[Id], [u].[Email], [u].[FirstName], [u].[LastName], [d].[Id], [d].[Marque], [d].[ModelName], [d].[Type], [d].[UserId]
-              FROM[User] AS[u]
-              LEFT JOIN[Device] AS[d] ON[u].[Id] = [d].[UserId]
-              WHERE[u].[Id] = 7
-              ORDER BY[u].[Id]   */
 
             if (device == null) throw new KeyNotFoundException("No Devices");
             return _mapper.Map<IEnumerable<UserDto>>(await device.ToListAsync());
@@ -87,7 +80,7 @@ namespace WebDemo.Api.Services
 
         }
 
-        public async Task AddUserAsync(UserAddOrUpdateDto userAddDto)
+        public async Task<int> AddUserAsync(UserAddOrUpdateDto userAddDto)
         {      
             var user = _mapper.Map<User>(userAddDto);
             //if user already exist najoute pas ...
@@ -95,16 +88,19 @@ namespace WebDemo.Api.Services
                 throw new KeyNotFoundException("Email already exists");
 
              var a = await _webApiDbContext.User.AddAsync(user);
-
+             
              var s = await _webApiDbContext.SaveChangesAsync();
+
+            return user.Id;
+
         }
-        public void AddUser(UserAddOrUpdateDto userAddDto)
+/*        public void AddUser(UserAddOrUpdateDto userAddDto)
         {
             var user = _mapper.Map<User>(userAddDto);
 
             var s =  _webApiDbContext.User.Add(user);
             var l = _webApiDbContext.SaveChanges();
-        }
+        }*/
 
         public async Task UpdateUserAsync(User user, UserAddOrUpdateDto userDto)
         {

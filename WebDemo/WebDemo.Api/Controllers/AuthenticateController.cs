@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -22,7 +23,7 @@ namespace WebDemo.Api.Controllers
     [ApiController]
     public class AuthenticateController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager; // User identity table
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly WebApiDbContext _userContext;
@@ -89,7 +90,7 @@ namespace WebDemo.Api.Controllers
         /// <response code="200">User created</response>
         /// <response code="400">Product has missing/invalid values</response>
         /// <response code="500">Oops! Can't create your product right now</response>
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
@@ -127,7 +128,7 @@ namespace WebDemo.Api.Controllers
                 await _userManager.AddToRoleAsync(user, UserRoles.User);
             }
 
-            return Ok(new Response { Status = "Success", Message = "User created successfully!" });
+            return Ok(new Response { Status = "Success", Message = "User created successfully!" , UserId = user.Id });
         }
 
 
@@ -136,7 +137,7 @@ namespace WebDemo.Api.Controllers
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "Admin")]
         [Route("Register-Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -176,7 +177,8 @@ namespace WebDemo.Api.Controllers
             }
 
 
-            return Ok(new Response { Status = "Succes", Message = "User created successfully!" });
+            return Ok(new Response { Status = "Success", Message = "User created successfully!", 
+                UserId = user.Id });
         }
 
         /// <summary>

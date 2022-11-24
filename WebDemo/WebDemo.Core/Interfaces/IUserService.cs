@@ -13,8 +13,8 @@ namespace WebDemo.Core.Interfaces
         Task<IEnumerable<UserDto>> FindDevicesByUserIdAsync(int id);
         Task<UserDto> GetUserAsync(int id);
         Task DeleteUserAsync(int id);
-        Task AddUserAsync(UserAddOrUpdateDto userAddDto);
-        void AddUser(UserAddOrUpdateDto userAddDto);
+        Task<int> AddUserAsync(UserAddOrUpdateDto userAddDto);
+        //void AddUser(UserAddOrUpdateDto userAddDto);
         Task UpdateUserAsync(User user, UserAddOrUpdateDto userDto);
         Task<User> FindUserByIdAsync(int id);
     }

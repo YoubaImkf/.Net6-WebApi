@@ -35,7 +35,7 @@ namespace WebDemo.Api.Controllers.V1
         /// <summary> 
         /// Retourne tout les clients
         /// </summary>
-        [HttpGet, Authorize(Roles ="Admin")]
+        [HttpGet, Authorize(Roles = "User, Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces("application/json")]
@@ -54,7 +54,7 @@ namespace WebDemo.Api.Controllers.V1
         ///     
         /// </remarks>
         // GET api/<UsersController>/5 READ{id}
-        [HttpGet("{id}")]
+        [HttpGet("{id}"), Authorize(Roles = "User,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces("application/json")]
@@ -67,7 +67,7 @@ namespace WebDemo.Api.Controllers.V1
         ///  Surpprime un client en fonction de son id
         /// </summary>
         /// <param name="id"></param>
-        [HttpDelete("{id}")]
+        [HttpDelete("{id}"), Authorize(Roles = "User,Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -80,19 +80,19 @@ namespace WebDemo.Api.Controllers.V1
         /// <summary> 
         ///  Ajoute un client
         /// </summary>
-        [HttpPost]
+        [HttpPost, Authorize(Roles = "User,Admin")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> Post([FromBody] UserAddOrUpdateDto userAddDto)
+        public async Task<int> Post([FromBody] UserAddOrUpdateDto userAddDto)
         {
-            await _userService.AddUserAsync(userAddDto);
-            return Ok();
+            var user = await _userService.AddUserAsync(userAddDto);
+            return user;
         }
 
         /// <summary> 
         ///  Modifie un client en fonction de son id
         /// </summary>
-        [HttpPut("{id}")]
+        [HttpPut("{id}"), Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> Put([FromBody] UserAddOrUpdateDto userDto, int id)
         {
             var notification = new Notification("An User has been update", DateTime.Now);
@@ -112,7 +112,7 @@ namespace WebDemo.Api.Controllers.V1
         ///  Recupere les devices d'un client en fonction de son id
         /// </summary>
         //ambiguïté route (action=methode)
-        [HttpGet("{id}/[action]")]
+        [HttpGet("{id}/[action]"), Authorize(Roles = "User,Admin")]
         public async Task<IActionResult> Devices(int id)
         {
             return Ok(await _userService.FindDevicesByUserIdAsync(id));
