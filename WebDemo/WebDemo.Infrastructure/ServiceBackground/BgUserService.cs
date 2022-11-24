@@ -55,7 +55,5 @@ public class BgUserService : BackgroundService
 
         }
     }
-    // private function that send notification if a particular user is logged in
-
 
 }
