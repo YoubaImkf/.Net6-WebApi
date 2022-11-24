@@ -25,8 +25,9 @@
 -Authentication and Authorization (swagger / EntitiesAuth)  
 -Unit Test ( Xunit [serviceProvider] )  
 -Unit Test with Moq (Test double)  
--ASP.NET Core SignalR (Streaming DATA from client(console) to server(API)🔁)
-
+-ASP.NET Core SignalR (Streaming DATA from client(console) to server(API)🔁)  
+-Background Service(using Signal for Notification & ServiceScopeFactory to get service )  
+-Actually on SoapUI...
 
 ## 📄License
 [MIT](https://choosealicense.com/licenses/mit/)
