@@ -1,5 +1,11 @@
 # 📡WEB API💻
 
+#### Informations :
+> I tried my best to create the API as great as i can, it propably need
+> to be improved. I do not really comments at all, i apologize but i
+> specify my sources. I have issues on load test the API does not
+> support multiple thread.
+
 ## Project :
 
 **Creation from scratch of an API that manages Users in .Net 6🚀** 

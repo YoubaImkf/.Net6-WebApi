@@ -15,9 +15,9 @@ using WebDemo.Core.RealTimeModels;
 
 namespace WebDemo.Api.Controllers.V1
 {
-    [Route("/api/v{version:apiVersion}/[controller]")]
     [ApiController]
     [ApiVersion("1.0")]
+    [Route("/api/v{version:apiVersion}/[controller]")]
     public class UsersController : ControllerBase
     {
         //source: https://code-maze.com/automapper-net-core/

@@ -14,7 +14,6 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System;
@@ -176,7 +175,7 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
         }
     });
     #endregion
-    
+
     app.MapHub<NotificationHub>("/WebDemoHub");// SignalR EndPoint | ClientProgram
 
     app.UseAuthentication();//authentication

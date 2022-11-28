@@ -2,18 +2,16 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using WebApiDemo.Core.Models;
 using WebDemo.Core.Dtos.Auth;
-using WebDemo.Core.RealTimeModels;
 using WebDemo.Infrastructure.Data;
 
 
@@ -25,16 +23,17 @@ namespace WebDemo.Api.Controllers
     {
         private readonly UserManager<IdentityUser> _userManager; // User identity table
         private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IConfiguration _configuration;
+        private readonly SignInManager<IdentityUser> _signInManager; // handles the user sign in 
+        private readonly IConfiguration _configuration; 
         private readonly WebApiDbContext _userContext;
-       
 
-        public AuthenticateController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, WebApiDbContext userContext)
+        public AuthenticateController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, WebApiDbContext userContext, SignInManager<IdentityUser> signInManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _configuration = configuration;
             _userContext = userContext;
+            _signInManager = signInManager;
         }
 
         /// <summary>
@@ -79,6 +78,20 @@ namespace WebDemo.Api.Controllers
                 });
             }
             return Unauthorized("Try Again");
+        }
+
+
+        /// <summary>
+        /// Permet de se déconnecter (le token reste toujours actif)
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [Route("logout")] // actually useless cuz here we create a token for login
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return Ok( new Response { Status = "Success", Message = "Logged out." });
         }
 
 
@@ -210,14 +223,15 @@ namespace WebDemo.Api.Controllers
 
         }
 
+
         private JwtSecurityToken GetToken(List<Claim> authClaims)
         {
-            var authSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration["JWT:Key"]));
+            var authSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration["JWT:Key"])); 
 
             var token = new JwtSecurityToken(
-                issuer: _configuration["JWT:ValidIssuer"], //emetteur
+                issuer: _configuration["JWT:ValidIssuer"], // emetteur appSetting
                 audience: _configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.Now.AddHours(1), 
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
