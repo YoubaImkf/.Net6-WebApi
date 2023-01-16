@@ -28,7 +28,7 @@ namespace WebDemo.Api.Controllers.V2
             _logger = logger;
         }
 
-        //We ned to enable the generation of XML comments
+        //We need to enable the generation of XML comments
         /// <summary> 
         /// Retourne tout les clients
         /// </summary>

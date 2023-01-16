@@ -17,7 +17,7 @@ namespace WebDemo.Api.Controllers.V1
 {
     [ApiController]
     [ApiVersion("1.0")]
-    [Route("/api/v{version:apiVersion}/[controller]")]
+    [Route("/api/{version:apiVersion}/[controller]")]
     public class UsersController : ControllerBase
     {
         //source: https://code-maze.com/automapper-net-core/
@@ -32,6 +32,7 @@ namespace WebDemo.Api.Controllers.V1
             _hubContext = hubContext;
         }
 
+        //We need to enable the generation of XML comments
         /// <summary> 
         /// Retourne tout les clients
         /// </summary>
@@ -54,7 +55,7 @@ namespace WebDemo.Api.Controllers.V1
         ///     
         /// </remarks>
         // GET api/<UsersController>/5 READ{id}
-        [HttpGet("{id}"), Authorize(Roles = "User,Admin")]
+        [HttpGet("{id}"), Authorize(Roles = "User, Admin")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [Produces("application/json")]
@@ -67,7 +68,7 @@ namespace WebDemo.Api.Controllers.V1
         ///  Surpprime un client en fonction de son id
         /// </summary>
         /// <param name="id"></param>
-        [HttpDelete("{id}"), Authorize(Roles = "User,Admin")]
+        [HttpDelete("{id}"), Authorize(Roles = "User, Admin")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status202Accepted)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -80,7 +81,8 @@ namespace WebDemo.Api.Controllers.V1
         /// <summary> 
         ///  Ajoute un client
         /// </summary>
-        [HttpPost, Authorize(Roles = "User,Admin")]
+        [HttpPost, Authorize(Roles = "User, Admin")]
+        [ProducesResponseType(201)]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<int> Post([FromBody] UserAddOrUpdateDto userAddDto)
@@ -92,7 +94,7 @@ namespace WebDemo.Api.Controllers.V1
         /// <summary> 
         ///  Modifie un client en fonction de son id
         /// </summary>
-        [HttpPut("{id}"), Authorize(Roles = "User,Admin")]
+        [HttpPut("{id}"), Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> Put([FromBody] UserAddOrUpdateDto userDto, int id)
         {
             var notification = new Notification("An User has been update", DateTime.Now);
@@ -112,7 +114,7 @@ namespace WebDemo.Api.Controllers.V1
         ///  Recupere les devices d'un client en fonction de son id
         /// </summary>
         //ambiguïté route (action=methode)
-        [HttpGet("{id}/[action]"), Authorize(Roles = "User,Admin")]
+        [HttpGet("{id}/[action]"), Authorize(Roles = "User, Admin")]
         public async Task<IActionResult> Devices(int id)
         {
             return Ok(await _userService.FindDevicesByUserIdAsync(id));

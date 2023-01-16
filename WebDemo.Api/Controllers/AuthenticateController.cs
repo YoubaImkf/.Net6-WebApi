@@ -10,7 +10,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using WebApiDemo.Core.Models;
 using WebDemo.Core.Dtos.Auth;
 using WebDemo.Infrastructure.Data;
 
@@ -85,8 +84,8 @@ namespace WebDemo.Api.Controllers
         /// <param name="model"></param>
         /// <returns></returns>
         /// <response code="200">User created</response>
-        /// <response code="400">Product has missing/invalid values</response>
-        /// <response code="500">Oops! Can't create your product right now</response>
+        /// <response code="400">User has missing/invalid values</response>
+        /// <response code="500">Oops! Can't create your User right now</response>
         [HttpPost, Authorize(Roles = "Admin")]
         [Route("register")]
         public async Task<IActionResult> Register([FromBody] RegisterModel model)
@@ -219,7 +218,7 @@ namespace WebDemo.Api.Controllers
                 claims: authClaims,
                 signingCredentials: new SigningCredentials(authSigningKey, SecurityAlgorithms.HmacSha256)
                 );
-
+           
             return token;
         }
 

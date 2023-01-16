@@ -2,9 +2,8 @@
 
 #### Informations :
 > I tried my best to create the API as great as i can, it propably need
-> to be improved. I do not really comments at all, i apologize but i
-> specify my sources. I have issues on load test the API does not
-> support multiple thread.
+> to be improved. I do not really i apologize if i do not comment everything.
+> ( i specify my sources.)
 
 ## Project :
 
@@ -33,7 +32,7 @@
 -Unit Test with Moq (Test double)  
 -ASP.NET Core SignalR (Streaming DATA from client(console) to server(API)🔁)  
 -Background Service(using Signal for Notification & ServiceScopeFactory to get service )  
--Actually on SoapUI...
+-SoapUI v5.7.0 for Functional test, Load test and Security test) / using [LucyBot converter](https://github.com/LucyBot-Inc/api-spec-converter) to convert OpenApi3 to swagger 2
 
 ## 📄License
 [MIT](https://choosealicense.com/licenses/mit/)
