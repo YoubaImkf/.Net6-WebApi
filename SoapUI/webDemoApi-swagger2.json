@@ -1,0 +1,606 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "contact": {
+      "name": "Contact Me",
+      "url": "https://imakhlaf-youba.fr/contact"
+    },
+    "description": "Web API for manage Users :3",
+    "title": "WebDemo Api",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/Authenticate/Delete-User": {
+      "delete": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "description": "",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DeleteDtoAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Server Error"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "Authenticate"
+        ],
+        "summary": "Permet de supprimer utilisateur (quel que soit son role)"
+      }
+    },
+    "/api/Authenticate/Register-Admin": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "description": "",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/RegisterModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "Authenticate"
+        ],
+        "summary": "Permet de s'enregistrer [role= ADMIN]"
+      }
+    },
+    "/api/Authenticate/login": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "description": "",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/LoginModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        },
+        "tags": [
+          "Authenticate"
+        ],
+        "summary": "Permet de se connecter (seulement si vous avez un compte User)"
+      }
+    },
+    "/api/Authenticate/register": {
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "description": "",
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/RegisterModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "User created"
+          },
+          "400": {
+            "description": "User has missing/invalid values"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Oops! Can't create your User right now"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "Authenticate"
+        ],
+        "summary": "Permet de s'enregistrer [role= USER]"
+      }
+    },
+    "/api/v1/Users": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Retourne tout les clients"
+      },
+      "post": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UserAddOrUpdateDto"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Ajoute un client"
+      }
+    },
+    "/api/v1/Users/{id}": {
+      "delete": {
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "description": "",
+            "format": "int32",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "400": {
+            "description": "Bad Request",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Surpprime un client en fonction de son id"
+      },
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/UserDto"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found",
+            "schema": {
+              "$ref": "#/definitions/ProblemDetails"
+            }
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "description": "Sample value of message\r\n\r\n    Hello World this is a text! :P",
+        "summary": "Retourne un client en fonction de son id"
+      },
+      "put": {
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/UserAddOrUpdateDto"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Modifie un client en fonction de son id"
+      }
+    },
+    "/api/v1/Users/{id}/Devices": {
+      "get": {
+        "parameters": [
+          {
+            "format": "int32",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "oauth2": []
+          }
+        ],
+        "tags": [
+          "Users"
+        ],
+        "summary": "Recupere les devices d'un client en fonction de son id"
+      }
+    }
+  },
+  "definitions": {
+    "DeleteDtoAuth": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "type": "object"
+    },
+    "DeviceDto": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "modelName": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "type": "object"
+    },
+    "LoginModel": {
+      "additionalProperties": false,
+      "properties": {
+        "email": {
+          "format": "email",
+          "minLength": 1,
+          "type": "string"
+        },
+        "password": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "password"
+      ],
+      "type": "object"
+    },
+    "ProblemDetails": {
+      "additionalProperties": {},
+      "properties": {
+        "detail": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "instance": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "status": {
+          "format": "int32",
+          "type": "integer",
+          "x-nullable": true
+        },
+        "title": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "type": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "type": "object"
+    },
+    "RegisterModel": {
+      "additionalProperties": false,
+      "properties": {
+        "email": {
+          "format": "email",
+          "minLength": 1,
+          "type": "string"
+        },
+        "password": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "username": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "password",
+        "username"
+      ],
+      "type": "object"
+    },
+    "UserAddOrUpdateDto": {
+      "additionalProperties": false,
+      "properties": {
+        "email": {
+          "format": "email",
+          "minLength": 1,
+          "type": "string"
+        },
+        "firstName": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "lastName": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "email",
+        "firstName",
+        "lastName"
+      ],
+      "type": "object"
+    },
+    "UserDto": {
+      "additionalProperties": false,
+      "properties": {
+        "devices": {
+          "items": {
+            "$ref": "#/definitions/DeviceDto"
+          },
+          "type": "array",
+          "x-nullable": true
+        },
+        "email": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "firstName": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "id": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastName": {
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "type": "object"
+    }
+  },
+  "securityDefinitions": {
+    "oauth2": {
+      "description": "Standard Authorization header using Bearer scheme {\"bearer {token}\")",
+      "in": "header",
+      "name": "Authorization",
+      "type": "apiKey"
+    }
+  },
+  "security": [
+    {
+      "oauth2": []
+    }
+  ],
+  "x-components": {}
+}
