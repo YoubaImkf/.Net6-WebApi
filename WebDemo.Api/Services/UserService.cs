@@ -91,7 +91,10 @@ namespace WebDemo.Api.Services
              
              var s = await _webApiDbContext.SaveChangesAsync();
 
-            return user.Id;
+            var userId = user.Id;
+            if (userId == 0) throw new ArgumentException("Le user id est null");
+
+            return userId;
 
         }
 /*        public void AddUser(UserAddOrUpdateDto userAddDto)
