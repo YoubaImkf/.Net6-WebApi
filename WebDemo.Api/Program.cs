@@ -18,7 +18,9 @@ using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using System;
 using System.Text;
+using WebDemo.Api.Configuration;
 using WebDemo.Api.Options;
+using WebDemo.Api.Services;
 using WebDemo.Core.Hubs;
 using WebDemo.Core.Interfaces;
 using WebDemo.Infrastructure;
@@ -74,6 +76,12 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
     // IOptionsSnapshot
     builder.Services.Configure<PositionOption>(
         builder.Configuration.GetSection("Position"));
+
+    // MailSetting
+    builder.Services.Configure<MailSettings>(
+        builder.Configuration.GetSection(nameof(MailSettings)));
+
+    builder.Services.AddTransient<IMailService, MailService>();
     #endregion
 
     #region //--------SeriLog--------
