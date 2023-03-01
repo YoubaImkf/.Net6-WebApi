@@ -2,6 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -130,7 +132,29 @@ namespace WebDemo.Api.Services
             return user;
         }
 
+        public async Task<string> GetUserJsonAsync(int userId)
+        {
+            // Retrieve user data based on the user ID
+            var userData = await GetUserAsync(userId);
+            var userDevices = await FindDevicesByUserIdAsync(userId);
 
+            // Create a new dictionary to hold both user data and device data
+            var userJsonDict = new Dictionary<string, object>
+            {
+                {"userData", userData},
+                {"userDevices", userDevices}
+            };
+
+            // Convert the dictionary to a JSON string
+            var jsonSettings = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                Formatting = Newtonsoft.Json.Formatting.Indented
+            };
+            var json = JsonConvert.SerializeObject(userJsonDict, jsonSettings);
+
+            return json;
+        }
 
     }
 }

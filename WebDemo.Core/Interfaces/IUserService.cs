@@ -17,5 +17,6 @@ namespace WebDemo.Core.Interfaces
         //void AddUser(UserAddOrUpdateDto userAddDto);
         Task UpdateUserAsync(User user, UserAddOrUpdateDto userDto);
         Task<User> FindUserByIdAsync(int id);
+        Task<string> GetUserJsonAsync(int userId);
     }
 }

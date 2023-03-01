@@ -68,7 +68,7 @@ try // source: https://stackoverflow.com/questions/63642991/serilog-extensions-h
     builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     #endregion
 
-    #region //--------OPTIONS------------
+    #region //--------OPTIONS------------ + MAIL 
     // IOptions
     builder.Services.Configure<PositionOption>(
         builder.Configuration.GetSection(PositionOption.Position));

@@ -14,5 +14,8 @@ namespace WebDemo.Core.Interfaces
     {
         Task<bool> SendAsync(MailData mailData, CancellationToken ct);
         Task<bool> SendWithAttachmentsAsync(MailDataWithAttachments mailData, CancellationToken ct);
+        Task<bool> SendLinkAttachmentsAsync(MailDataWithAttachments mailData, CancellationToken ct);
+        Task<bool> SendUserDataAsJsonZipAttachment(int userId, string emailAddress, CancellationToken ct = default);
     }
 }
+

@@ -47,5 +47,36 @@ namespace WebDemo.Api.Controllers.V1
                 return StatusCode(StatusCodes.Status500InternalServerError, "An error occured. The Mail with attachment could not be sent.");
             }
         }
+
+        [HttpPost("SendLinkAttachmentsAsync")]
+        public async Task<IActionResult> SendLinkAttachmentsAsync([FromForm] MailDataWithAttachments mailData)
+        {
+            bool result = await _mail.SendLinkAttachmentsAsync(mailData, new CancellationToken());
+
+            if (result)
+            {
+                return StatusCode(StatusCodes.Status200OK, "Mail with Link attachment has successfully been sent.");
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occured. The Mail with Link attachment could not be sent.");
+            }
+        }
+
+        [HttpPost("SendUserDataAsJsonZipAttachment")]
+        public async Task<IActionResult> SendUserDataAsJsonZipAttachment(int userId, string emailAddress, CancellationToken ct = default)
+        {
+            bool result = await _mail.SendUserDataAsJsonZipAttachment(userId, emailAddress, new CancellationToken());
+
+            if (result)
+            {
+                return StatusCode(StatusCodes.Status200OK, "Mail with Link attachment has successfully been sent.");
+            }
+            else
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occured. The Mail with Link attachment could not be sent.");
+            }
+        }
+
     }
 }

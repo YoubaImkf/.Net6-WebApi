@@ -33,7 +33,7 @@
 -ASP.NET Core SignalR (Streaming DATA from client(console) to server(API)🔁)  
 -Background Service(using Signal for Notification & ServiceScopeFactory to get service )  
 -SoapUI v5.7.0 for Functional test, Load test and Security test) / using [LucyBot converter](https://github.com/LucyBot-Inc/api-spec-converter) to convert OpenApi3 to swagger 2  
--Implementing a SendEmail with or not Attachments (MailKit library + Ethereal a fake SMTP service)
+-Implementing a SendEmail with or not Attachments + a package data zip (MailKit library + MailHog/Ethereal fake SMTP service)
 
 ## 📄License
 [MIT](https://choosealicense.com/licenses/mit/)
