@@ -70,11 +70,11 @@ namespace WebDemo.Api.Controllers.V1
 
             if (result)
             {
-                return StatusCode(StatusCodes.Status200OK, "Mail with Link attachment has successfully been sent.");
+                return StatusCode(StatusCodes.Status200OK, "Mail with user's data attachment has successfully been sent.");
             }
             else
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "An error occured. The Mail with Link attachment could not be sent.");
+                return StatusCode(StatusCodes.Status500InternalServerError, "An error occured. The Mail with user's data attachment could not be sent.");
             }
         }
 

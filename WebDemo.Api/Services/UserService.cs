@@ -121,17 +121,6 @@ namespace WebDemo.Api.Services
             await _webApiDbContext.SaveChangesAsync();
         }
 
-
-
-        //================== PRIVATE tjr à la fin ==================
-        public async Task<User> FindUserByIdAsync(int id)
-        {
-            var user = await _webApiDbContext.User.Where(e => e.Id == id).FirstOrDefaultAsync();
-            //var user = await _webApiDbContext.User.FindAsync(id);
-            if (user == null) throw new KeyNotFoundException("User not found");
-            return user;
-        }
-
         public async Task<string> GetUserJsonAsync(int userId)
         {
             // Retrieve user data based on the user ID
@@ -155,6 +144,17 @@ namespace WebDemo.Api.Services
 
             return json;
         }
+
+        //================== PRIVATE tjr à la fin ==================
+        public async Task<User> FindUserByIdAsync(int id)
+        {
+            var user = await _webApiDbContext.User.Where(e => e.Id == id).FirstOrDefaultAsync();
+            //var user = await _webApiDbContext.User.FindAsync(id);
+            if (user == null) throw new KeyNotFoundException("User not found");
+            return user;
+        }
+
+        
 
     }
 }
