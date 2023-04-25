@@ -1,26 +1,17 @@
-﻿using Microsoft.Extensions.Options;
+﻿using MailKit.Security;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Options;
 using MimeKit;
-using System.Linq;
-using System.Net.Mail;
 using System;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using WebDemo.Api.Configuration;
 using WebDemo.Core.Interfaces;
-using MailKit.Net.Smtp;
-using MailKit.Security;
 using WebDemo.Core.Models.Mail;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Caching.Distributed;
-using System.Text;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
-using System.Text.Json;
-using WebApiDemo.Core.Models;
-using System.IO.Compression;
-using WebApiDemo.Dtos;
 
 // SOURCE: https://blog.christian-schou.dk/send-emails-with-asp-net-core-with-mailkit/
 
